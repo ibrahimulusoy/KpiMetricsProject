@@ -3,19 +3,12 @@ import kpiconfig as cfg
 
 class BaseKPI():
     def dbConnection():
-
-        x = 'Driver = %s;Server = %s;Database = %s;Trusted_Connection=%s;' % (cfg.mssql['Driver'],cfg.mssql['Server'],cfg.mssql['Database'],'yes')
-        #conn = pyodbc.connect('Driver = {%s};Server = %s;Database = %s;Trusted_Connection=%s;' % (cfg.mssql['Driver'],cfg.mssql['Server'],cfg.mssql['Database'],'yes'))
-
-        conn = pyodbc.connect('Driver = {SQL Server};'
-                              'Server = localhost;'
-                              'Database = HPS_METRICS;'
-                              'Trusted_Connection=yes;')
-
-
-
-
+        conn = pyodbc.connect(("Driver=%s;Server=%s;Database=%s;Trusted_Connection=%s;"%(cfg.mssql['Driver'],cfg.mssql['Server'],cfg.mssql['Database'],'yes')))
         return conn
+
+
+
+
 
 
 
