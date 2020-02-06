@@ -1,18 +1,17 @@
-import pyodbc
+from sqlalchemy import create_engine
 import kpiconfig as cfg
+import pandas as pd
 
 class BaseKPI():
+    global engine
+
+    engine = create_engine('mssql+pyodbc://{}:{}@{}/{}?driver={}'.format(cfg.mssql['Username'], cfg.mssql['Password'], cfg.mssql['Server'], cfg.mssql['Database'], cfg.mssql['Driver']))
     def dbConnection():
-        conn = pyodbc.connect(("Driver=%s;Server=%s;Database=%s;Trusted_Connection=%s;"%(cfg.mssql['Driver'],cfg.mssql['Server'],cfg.mssql['Database'],'yes')))
-        return conn
+        return engine
+
+    def InsertKPIScores(df:pd.DataFrame, tableName):
+        df.to_sql(tableName, engine, if_exists='append', index=False)
+        return
 
 
 
-
-
-
-
-#connect(cfg.mysql['host'], cfg.mysql['user'], cfg.mysql['password'])
-#print("Hello {}, your balance is {}.".format("Adam", 230.2346))
-#self.db = pyodbc.connect('driver={%s};server=%s;database=%s;uid=%s;pwd=%s' % ( driver, server, db, user, password ) )
-#self.db = pyodbc.connect(driver=driver, server=server, database=db,trusted_connection='yes')
