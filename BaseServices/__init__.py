@@ -9,9 +9,7 @@ class BaseKPI():
     def dbConnection():
         return engine
 
-    def InsertKPIScores(df:pd.DataFrame, tableName):
-        df.to_sql(tableName, engine, if_exists='append', index=False)
-        return
+
 
 
 
