@@ -37,7 +37,7 @@ df = pd.merge(df1, df2, on='EntityShortName')
 df["Division"] = df["CurrentEnrollment"] / df["BudgetedEnrollment"] * 100
 df["Score"] = df["Division"].apply(lambda x: 4 if x >= 102 else (3 if x >= 100 else (2 if x >= 98 else (1 if x >= 97 else 0))))
 
-#Get KPI details for that spacific KPI and arrange required columns for target table
+#Get KPI details for that specific KPI and arrange required columns for target table
 #Target table is Fact_KPI_Campus on the HPS_METRICS db.
 kpiDetails = getKPIDetails(60100010001)
 df.rename(columns={'EntityID':'Campus_RowID'}, inplace=True)
