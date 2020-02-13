@@ -49,6 +49,7 @@ df['Department_RowID']=int(kpiDetails['DepartmentKey'])
 df['Is_KPI_Applicable']=int(kpiDetails['Is_KPI_Applicable'])
 adjustedWeight = int(kpiDetails['Is_KPI_Applicable']) * int(kpiDetails['Weight'])
 df['Adjusted_Weight']= adjustedWeight
+
 df['Adjusted_Score'] = df['Adjusted_Weight'] * df['Score']
 
 #Get district codes for all campuses from HPS_METRICS db.
