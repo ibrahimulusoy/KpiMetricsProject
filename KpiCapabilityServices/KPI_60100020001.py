@@ -11,8 +11,6 @@ df["Raw_Score"] = df["Raw_Score"].map(lambda x : x[0:-1])
 df["Raw_Score"] = pd.to_numeric(df["Raw_Score"])
 df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x >= 98 else (3 if x >= 96 else (2 if x >= 95 else (1 if x >= 94 else 0))))
 
-df.to_csv(r'C:\Users\eatakahraman\Desktop\aa.csv')
-
 #Get KPI details for that spacific KPI and arrange required columns for target table
 #Target table is Fact_KPI_Campus on the HPS_METRICS db.
 kpiDetails = Entities.KpiOperations.getKPIDetails(60100020001)
