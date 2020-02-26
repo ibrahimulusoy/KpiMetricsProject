@@ -24,12 +24,11 @@ class BaseKPI():
         adjustedWeight = int(kpiDetails['Is_KPI_Applicable']) * int(kpiDetails['Weight'])
         df['Adjusted_Weight'] = adjustedWeight
         df['Adjusted_Score'] = df['Adjusted_Weight'] * df['Score']
-
         # Get district codes for all campuses from HPS_METRICS db.
         districts = Entities.KpiOperations.getDistrictsForAllCampuses()
         df = pd.merge(df, districts, left_on='Campus_RowID', right_on='CampusKey')
         df = df[['District_RowID', 'Campus_RowID', 'Term_RowID', 'KPI_RowID', 'Category_RowID',
-                 'Department_RowID', 'Is_KPI_Applicable', 'Adjusted_Weight', 'Adjusted_Score', 'Score', 'Raw_Score', 'Raw_Score_Details', 'Artifact_URL']]
+                 'Department_RowID', 'Is_KPI_Applicable', 'Adjusted_Weight', 'Adjusted_Score', 'Score', 'Raw_Score','Raw_Score_Details','Artifact_URL']]
 
         # Delete old rows(if exists) for this KPI for this specific term before inserting new records
         Entities.KpiOperations.delKPIOldRecords(kpi_rowid, Term_RowID)
