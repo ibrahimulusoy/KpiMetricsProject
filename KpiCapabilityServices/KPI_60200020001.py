@@ -1,0 +1,11 @@
+import pandas as pd
+from BaseServices import Bases
+
+
+df=pd.read_csv(r"C:\Users\iulusoy\Desktop\KPI\KPI_60200020001.csv")
+
+df["Raw_Score"] = df["TotalWithdrawn"] / df["CurrentEnrollment"] * 100
+df['Raw_Score_Details'] = 'CustomDev.KPI_60200020001'
+df['Artifact_URL'] = 'SKYWARD'
+
+Bases.BaseKPI.setKPIDetails(df, 60200020001)
