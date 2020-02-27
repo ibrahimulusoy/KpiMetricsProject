@@ -14,14 +14,13 @@ class BaseKPI():
                                                         else (2 if x >= int(kpiDetails['Score2'])
                                                         else (1 if x >= int(kpiDetails['Score1'])
                                                         else 0))))
-
         Term_RowID = int(kpiDetails['Term_RowID'])
         df['Term_RowID'] = Term_RowID
         df['KPI_RowID'] = int(kpiDetails['KPI_Row_Id'])
         df['Category_RowID'] = int(kpiDetails['CategoryKey'])
         df['Department_RowID'] = int(kpiDetails['DepartmentKey'])
         df['Is_KPI_Applicable'] = int(kpiDetails['Is_KPI_Applicable'])
-        adjustedWeight = int(kpiDetails['Is_KPI_Applicable']) * int(kpiDetails['Weight'])
+        adjustedWeight = float(kpiDetails['Is_KPI_Applicable']) * float(kpiDetails['Weight'])
         df['Adjusted_Weight'] = adjustedWeight
         df['Adjusted_Score'] = df['Adjusted_Weight'] * df['Score']
         # Get district codes for all campuses from HPS_METRICS db.
@@ -33,7 +32,7 @@ class BaseKPI():
         # Delete old rows(if exists) for this KPI for this specific term before inserting new records
         Entities.KpiOperations.delKPIOldRecords(kpi_rowid, Term_RowID)
         Entities.KpiOperations.insertFactKPICampuses(df, 'Fact_KPI_Campus')
-        return df
+
 
 
 
