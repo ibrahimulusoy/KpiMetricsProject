@@ -11,4 +11,4 @@ df['Artifact_URL'] = 'SKYWARD'
 
 print (df["Raw_Score"])
 
-Bases.BaseKPI.setKPIDetails(df, 60200020001)
+Bases.BaseKPI.setKPIDetails(df, False,60200020001)

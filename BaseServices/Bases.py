@@ -3,17 +3,25 @@ import pandas as pd
 
 
 class BaseKPI():
-    def setKPIDetails(df, kpi_rowid):
+    def setKPIDetails(df,isGreaterThan, kpi_rowid):
         # Get KPI details for that spacific KPI and arrange required columns for target table
         # Target table is Fact_KPI_Campus on the HPS_METRICS db.
         kpiDetails = Entities.KpiOperations.getKPIDetails(kpi_rowid)
 
         # Calculate score based on score levels on DIM_KPI_WEIGHT
-        df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x >= int(kpiDetails['Score4'])
-                                                        else (3 if x >= int(kpiDetails['Score3'])
-                                                        else (2 if x >= int(kpiDetails['Score2'])
-                                                        else (1 if x >= int(kpiDetails['Score1'])
-                                                        else 0))))
+        if isGreaterThan == True:
+            df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x >= int(kpiDetails['Score4'])
+                                                            else (3 if x >= int(kpiDetails['Score3'])
+                                                            else (2 if x >= int(kpiDetails['Score2'])
+                                                            else (1 if x >= int(kpiDetails['Score1'])
+                                                            else 0))))
+        else:
+            df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x <= int(kpiDetails['Score4'])
+                                                            else (3 if x <= int(kpiDetails['Score3'])
+                                                            else (2 if x <= int(kpiDetails['Score2'])
+                                                            else (1 if x <= int(kpiDetails['Score1'])
+                                                            else 0))))
+
         Term_RowID = int(kpiDetails['Term_RowID'])
         df['Term_RowID'] = Term_RowID
         df['KPI_RowID'] = int(kpiDetails['KPI_Row_Id'])
