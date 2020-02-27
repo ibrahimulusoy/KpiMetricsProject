@@ -3,17 +3,24 @@ import pandas as pd
 
 
 class BaseKPI():
-    def setKPIDetails(df, kpi_rowid):
+    def setKPIDetails(df,isGreaterThan, kpi_rowid):
         # Get KPI details for that spacific KPI and arrange required columns for target table
         # Target table is Fact_KPI_Campus on the HPS_METRICS db.
         kpiDetails = Entities.KpiOperations.getKPIDetails(kpi_rowid)
 
         # Calculate score based on score levels on DIM_KPI_WEIGHT
-        df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x >= int(kpiDetails['Score4'])
-                                                        else (3 if x >= int(kpiDetails['Score3'])
-                                                        else (2 if x >= int(kpiDetails['Score2'])
-                                                        else (1 if x >= int(kpiDetails['Score1'])
-                                                        else 0))))
+        if isGreaterThan == True:
+            df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x >= int(kpiDetails['Score4'])
+                                                            else (3 if x >= int(kpiDetails['Score3'])
+                                                            else (2 if x >= int(kpiDetails['Score2'])
+                                                            else (1 if x >= int(kpiDetails['Score1'])
+                                                            else 0))))
+        else:
+            df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x <= int(kpiDetails['Score4'])
+                                                            else (3 if x <= int(kpiDetails['Score3'])
+                                                            else (2 if x <= int(kpiDetails['Score2'])
+                                                            else (1 if x <= int(kpiDetails['Score1'])
+                                                            else 0))))
 
         Term_RowID = int(kpiDetails['Term_RowID'])
         df['Term_RowID'] = Term_RowID
@@ -21,7 +28,7 @@ class BaseKPI():
         df['Category_RowID'] = int(kpiDetails['CategoryKey'])
         df['Department_RowID'] = int(kpiDetails['DepartmentKey'])
         df['Is_KPI_Applicable'] = int(kpiDetails['Is_KPI_Applicable'])
-        adjustedWeight = int(kpiDetails['Is_KPI_Applicable']) * int(kpiDetails['Weight'])
+        adjustedWeight = float(kpiDetails['Is_KPI_Applicable']) * float(kpiDetails['Weight'])
         df['Adjusted_Weight'] = adjustedWeight
         df['Adjusted_Score'] = df['Adjusted_Weight'] * df['Score']
         # Get district codes for all campuses from HPS_METRICS db.
@@ -33,7 +40,7 @@ class BaseKPI():
         # Delete old rows(if exists) for this KPI for this specific term before inserting new records
         Entities.KpiOperations.delKPIOldRecords(kpi_rowid, Term_RowID)
         Entities.KpiOperations.insertFactKPICampuses(df, 'Fact_KPI_Campus')
-        return df
+
 
 
 
