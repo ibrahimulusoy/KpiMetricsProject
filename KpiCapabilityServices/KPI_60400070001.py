@@ -13,7 +13,6 @@ df["Raw_Score"] = round(df["Raw_Score"], 2)
 df['Raw_Score_Details'] = 'CustomDev.KPI_60400070001'
 df['Artifact_URL'] = 'SKYWARD'
 
-
 Bases.BaseKPI.setKPIDetails(df, False, 60400070001)
 print('This KPI records has been inserted to Fact_KPI_Campus table.')
-print(df["Raw_Score"])
+print(df.to_string())
