@@ -8,8 +8,8 @@ Param2: enrollment (non-CEP schools only)
 
 import pandas as pd
 from BaseServices import Bases
-
-df = Bases.BaseKPI.getManuelKPIData('ReadADataFrame', 1)
+df = Bases.BaseKPI.getManuelKPIData('OperationsKPI_FoodServices', 1)
+df.rename(columns={df.columns[2]: 'Param1', df.columns[3]: 'Param2'}, inplace=True)
 df['Param1'] = pd.to_numeric(df['Param1'])
 df['Param2'] = pd.to_numeric(df['Param2'])
 df["Raw_Score"] = (df['Param1'] / df['Param2']) * 100

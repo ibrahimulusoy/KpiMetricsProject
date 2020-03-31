@@ -9,7 +9,8 @@ Param2: Enrollment
 import pandas as pd
 from BaseServices import Bases
 
-df = Bases.BaseKPI.getManuelKPIData('ReadADataFrame', 0)
+df = Bases.BaseKPI.getManuelKPIData('OperationsKPI_FoodServices', 0)
+df.rename(columns={df.columns[2]: 'Param1', df.columns[3]: 'Param2'}, inplace=True)
 df['Param1'] = pd.to_numeric(df['Param1'])
 df['Param2'] = pd.to_numeric(df['Param2'])
 df["Raw_Score"] = (df['Param2'] - df['Param1'])/df['Param2']*100
