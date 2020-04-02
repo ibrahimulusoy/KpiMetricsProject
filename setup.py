@@ -7,6 +7,6 @@ setup(name='kpimetrics',
       author='Harmony Public Schools',
       author_email='eatakahraman@harmonytx.org',
       description='Kpi Metrics project',
-      packages=find_packages(),#exclude=['tests']
+      packages=find_packages(),  #exclude=['tests']
       #long_description=open('README.md').read(),
-      zip_safe=False)
+      zip_safe=False, install_requires=['pandas'])
