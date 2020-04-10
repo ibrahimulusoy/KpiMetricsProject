@@ -13,4 +13,3 @@ Bases.BaseKPI.setKPIDetails(df, True, 60400090001)
 
 
 
-
