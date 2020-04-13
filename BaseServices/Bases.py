@@ -60,7 +60,7 @@ class BaseKPI():
         df2['Adjusted_Score'] = df2['Adjusted_Score'] / df2['TotalCampusWeight']
         df = df[['District_RowID', 'Term_RowID', 'KPI_RowID', 'Category_RowID', 'Department_RowID',
                  'Is_KPI_Applicable', 'Raw_Score_Details', 'Artifact_URL', 'Adjusted_Weight']]
-        #df.drop_duplicates(keep='first', inplace=True)
+        # df.drop_duplicates(keep='first', inplace=True)
         df = df.drop_duplicates()
         df = df.merge(df2, how='inner', on='District_RowID')
         max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
@@ -80,7 +80,7 @@ class BaseKPI():
         kpiDetails = Entities.KpiOperations.getKPIDetails(kpi_rowid)
 
         # Calculate score based on score levels on DIM_KPI_WEIGHT
-        if isGreaterThan == True:
+        if isGreaterThan:
             df["Score"] = df["Raw_Score"].apply(lambda x: 4 if x >= float(kpiDetails['Score4'])
             else (3 if x >= float(kpiDetails['Score3'])
                   else (2 if x >= float(kpiDetails['Score2'])
