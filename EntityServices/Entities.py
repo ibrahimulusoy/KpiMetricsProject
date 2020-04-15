@@ -47,3 +47,8 @@ class KpiOperations():
     def getMaxRowIdFromFactKPI():
         sql = 'select max(rowid) FROM [HPS_METRICS_QA].[dbo].[Fact_KPI]'
         return pd.read_sql(sql, conn)
+
+    def getSemesterNo():
+        sql = 'select semesterNo from [HPS_METRICS_QA].[dbo].[Dim_Term]' \
+              'where rowid=(select max(rowid) FROM [HPS_METRICS_QA].[dbo].[Dim_Term])'
+        return pd.read_sql(sql, conn)

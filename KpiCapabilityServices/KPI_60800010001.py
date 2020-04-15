@@ -13,4 +13,4 @@ df['Artifact_URL'] = 'SKYWARD'
 
 Bases.BaseKPI.setKPIDetails(df, False, 60800010001)
 print('This KPI records has been inserted to Fact_KPI_Campus table.')
-print(df.to_string())
+# print(df.to_string())
