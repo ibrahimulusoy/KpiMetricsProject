@@ -26,7 +26,7 @@ class KpiOperations():
         return kpiDetails
 
     def getDistrictsForAllCampuses():
-        sql = 'SELECT District_RowID,CampusKey,campus_weight FROM Dim_Campus'
+        sql = 'SELECT District_RowID,CampusKey FROM Dim_Campus'
         return pd.read_sql(sql, conn)
 
     def delKPIOldRecords(KPI_RowID, Term_RowID):
@@ -46,9 +46,4 @@ class KpiOperations():
 
     def getMaxRowIdFromFactKPI():
         sql = 'select max(rowid) FROM [HPS_METRICS_QA].[dbo].[Fact_KPI]'
-        return pd.read_sql(sql, conn)
-
-    def getSemesterNo():
-        sql = 'select semesterNo from [HPS_METRICS_QA].[dbo].[Dim_Term]' \
-                    'where rowid=(select max(rowid) FROM [HPS_METRICS_QA].[dbo].[Dim_Term])'
         return pd.read_sql(sql, conn)
