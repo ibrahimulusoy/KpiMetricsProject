@@ -1,4 +1,4 @@
-'''
+"""
 Operations Department's Manuel Entries
 KPI: % of Timely submission of critical reports
 This is a district-level KPI
@@ -6,7 +6,7 @@ Param1: Reports Submitted
 It is a Yes/No scoring.
 If all reports submitted on time  Param1= Yes and the KPI score will be 4,
 if not Param1=No and the score will be 1.
-'''
+"""
 
 from BaseServices import Bases
 

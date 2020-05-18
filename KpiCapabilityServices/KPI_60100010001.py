@@ -5,9 +5,9 @@ KPI: Number of Enrollment
 import pandas as pd
 from BaseServices import Bases
 
-#Get current and budgeted enrolment counts and calculate scores for all campuses
-df1 = pd.read_csv(r'C:\Users\eatakahraman\Desktop\KPI_60100010001.csv')
-df2 = pd.read_csv(r'C:\Users\eatakahraman\Desktop\KPI_60100010001_Budgeted.csv')
+# Get current and budgeted enrolment counts and calculate scores for all campuses
+df1 = pd.read_csv(r'D:\UNC\KPI\KPI_60100010001.csv')  # C:\Users\eatakahraman\Desktop
+df2 = pd.read_csv(r'D:\UNC\KPI\KPI_60100010001_Budgeted.csv')
 df = pd.merge(df1, df2, on='EntityShortName')
 df.rename(columns={'EntityID': 'Campus_RowID'}, inplace=True)
 df["Raw_Score"] = df["CurrentEnrollment"] / df["BudgetedEnrollment"] * 100
