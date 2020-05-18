@@ -7,7 +7,7 @@ from BaseServices import Bases
 from EntityServices import Entities
 pd.options.mode.chained_assignment = None  # default='warn'
 
-df = pd.read_csv(r'C:\Users\bballiyev\OneDrive - Harmony Public Schools\Desktop\KPI Project\KPI_60800020001.csv')
+df = pd.read_csv(r'{}\KPI_60800020001.csv'.format(Bases.BaseKPI.source_files_path))
 
 df["Referrals"].replace({0: 1}, inplace=True)
 df["ReferralsReturned"].replace({0: 1}, inplace=True)
@@ -49,10 +49,10 @@ result['Artifact_URL'] = 'SKYWARD'
 
 # DATABASE INSERTION
 if Entities.KpiOperations.getSemesterNo().semesterNo.item() == 1:
-    Bases.BaseKPI.setKPIDetails(dfVision, False, 60800020001)
+    Bases.BaseKPI.setKPIDetails(dfVision, False, 60800020001, True)
     print('Fall KPI record has been inserted to Fact_KPI_Campus table.')
 else:
-    Bases.BaseKPI.setKPIDetails(result, False, 60800020001)
+    Bases.BaseKPI.setKPIDetails(result, False, 60800020001, True)
     print('Spring KPI record has been inserted to Fact_KPI_Campus table.')
 
 

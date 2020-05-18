@@ -12,7 +12,7 @@ from BaseServices import Bases
 
 # Get campus-level raw scores from TEA district source file.
 # We are directly downloading campus-level scale scores from TEA web site by using Selenium.
-dfCampus = pd.read_csv(r'C:\Users\eatakahraman\Desktop\AcademicsKpiCampusSourceFile.csv')  # D:\UNC\KPI
+dfCampus = pd.read_csv(r'{}\AcademicsKpiCampusSourceFile.csv'.format(Bases.BaseKPI.source_files_path))
 dfCampus = dfCampus[['Campus_RowID', 'CDALLS']]
 dfCampus.rename(columns={'CDALLS': 'Raw_Score'}, inplace=True)
 dfCampus['Raw_Score_Details'] = ''

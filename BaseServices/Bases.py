@@ -2,11 +2,16 @@ from EntityServices import Entities
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+
 '''Useful link for gspread and oauth2client libraries :
 https://medium.com/@vince.shields913/reading-google-sheets-into-a-pandas-dataframe-with-gspread-and-oauth2-375b932be7bf
 '''
 
-class BaseKPI():
+
+class BaseKPI:
+    source_files_path = r'D:\UNC\KPI'
+    # source_files_path = r'C:\Users\eatakahraman\Desktop'
+
     def setKPIDetails(df, isGreaterThan, kpi_rowid, isDistrictScoresAsked):
         # Get KPI details for that specific KPI and arrange required columns for target tables
         # Insert campus-level and their district-level scores via this method.
@@ -114,7 +119,3 @@ class BaseKPI():
         headers = data.pop(0)
         df = pd.DataFrame(data, columns=headers)
         return df
-
-
-
-

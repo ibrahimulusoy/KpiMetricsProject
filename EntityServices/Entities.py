@@ -7,7 +7,7 @@ import pandas as pd
 # from BaseServices import BaseKPI
 # from BaseServices import Bases
 
-class KpiOperations():
+class KpiOperations:
     global conn
 
     conn = sqlalchemy.create_engine('mssql+pyodbc://{}:{}@{}/{}?driver={}'
@@ -26,7 +26,7 @@ class KpiOperations():
         return kpiDetails
 
     def getDistrictsForAllCampuses():
-        sql = 'SELECT District_RowID,CampusKey FROM Dim_Campus'
+        sql = 'SELECT District_RowID, CampusKey, campus_weight FROM Dim_Campus'
         return pd.read_sql(sql, conn)
 
     def delKPIOldRecords(KPI_RowID, Term_RowID):
