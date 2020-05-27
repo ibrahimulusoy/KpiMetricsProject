@@ -30,7 +30,8 @@ class KpiOperations:
         return pd.read_sql(sql, conn)
 
     def delKPIOldRecords(KPI_RowID, Term_RowID):
-        # sql='Delete [HPS_METRICS_QA].[dbo].[Fact_KPI_Campus] where KPI_RowID={} and Term_RowID={}'.format(KPI_RowID, Term_RowID)
+        # sql='Delete [HPS_METRICS_QA].[dbo].[Fact_KPI_Campus] where KPI_RowID={} and Term_RowID={}'.format(
+        # KPI_RowID, Term_RowID)
         sql = 'Delete Fact_KPI_Campus where KPI_RowID={} and Term_RowID={}'.format(KPI_RowID, Term_RowID)
         conn.execute(sql)
 
