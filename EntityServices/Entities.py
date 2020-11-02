@@ -21,7 +21,8 @@ class KpiOperations:
               'join Dim_Category C on  c.CategoryKey=k.CategoryKey ' \
               'join dim_department d on d.DepartmentKey=c.DepartmentKey ' \
               'join.dim_kpi_weight w on w.KPI_RowID=k.RowID ' \
-              'where k.RowID={}'.format(KPI_RowID)
+              'where k.RowID={}' \
+              'and w.Term_RowID=(select max(RowID) Term_Row_ID from Dim_Term t)'.format(KPI_RowID)
         kpiDetails = pd.read_sql(sql, conn)
         return kpiDetails
 

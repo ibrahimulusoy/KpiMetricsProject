@@ -15,5 +15,5 @@ df['enrollment (non-CEP schools only)'] = pd.to_numeric(df['enrollment (non-CEP 
 df["Raw_Score"] = (df['# meal accounts over district limit'] / df['enrollment (non-CEP schools only)']) * 100
 df['Raw_Score_Details'] = "Primero"
 df['Artifact_URL'] = 'https://drive.google.com/file/d/1Zzi3WCOTCeiiivJQn5UCiPszNKWRD1pQ/view?ts=5e723e32'
-Bases.BaseKPI.setDistrictKPIDetails(df, True, 60600030001)
+Bases.BaseKPI.setDistrictKPIDetails(df, False, 60600030001)
 

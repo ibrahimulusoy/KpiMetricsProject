@@ -1,3 +1,7 @@
+"""
+SAT EBRW Average
+"""
+
 import pandas as pd
 from BaseServices import Bases
 

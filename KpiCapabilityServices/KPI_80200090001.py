@@ -32,6 +32,6 @@ df = df[['EntityID', 'ExamCount', 'PassedExams']]
 df.rename(columns={'EntityID': 'Campus_RowID'}, inplace=True)
 df["Raw_Score"] = df["PassedExams"] / df["ExamCount"] * 100
 df['Raw_Score_Details'] = ''
-df['Artifact_URL'] = ''
+df['Artifact_URL'] = 'College Bound'
 Bases.BaseKPI.setKPIDetails(df, True, 80200090001, True)
 

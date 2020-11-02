@@ -18,7 +18,7 @@ df = df[['SchoolName', 'Discipline', 'GrowthMeasureYN',
 df = df[(df['GrowthMeasureYN'] == True) & (df['Discipline'] == 'Language')]
 dfTotalSchoolStudentCounts = df.groupby('SchoolName')['FallToWinterMetProjectedGrowth'].count().reset_index()
 dfTotalSchoolStudentCounts.rename(columns={'FallToWinterMetProjectedGrowth': 'TotalStudents'}, inplace=True)
-dfGrowthCounts = df[(df['FallToWinterMetProjectedGrowth'] == 'Yes') | (df['FallToWinterMetProjectedGrowth'] == 'Yes*')].\
+dfGrowthCounts = df[(df['FallToWinterMetProjectedGrowth'] == 'Yes') | (df['FallToWinterMetProjectedGrowth'] == 'Yes*')]. \
     groupby('SchoolName')['FallToWinterMetProjectedGrowth'].count().reset_index()
 dfGrowthCounts.rename(columns={'FallToWinterMetProjectedGrowth': 'MadeGrowth'}, inplace=True)
 df = dfGrowthCounts.merge(dfTotalSchoolStudentCounts, on='SchoolName')
@@ -29,6 +29,6 @@ df = df.merge(dfCampuses, on='EntityShortName')
 df.rename(columns={'EntityID': 'Campus_RowID'}, inplace=True)
 df["Raw_Score"] = df["MadeGrowth"] / df["TotalStudents"] * 100
 # df["Raw_Score"] = round(df["Raw_Score"], 2)
-df['Raw_Score_Details'] = ''
+df['Raw_Score_Details'] = 'FallToWinterGrowth'
 df['Artifact_URL'] = 'https://www.nwea.org/'
 Bases.BaseKPI.setKPIDetails(df, True, 80300040001, True)

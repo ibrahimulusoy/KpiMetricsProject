@@ -21,7 +21,7 @@ Bases.BaseKPI.setKPIDetails(dfCampus, True, 80100010001, False)
 
 # Get district-level raw scores from TEA district source file.
 # We are directly downloading district-level scale scores from TEA web site by using Selenium.
-dfDistrict = pd.read_csv(r'C:\Users\eatakahraman\Desktop\AcademicsKpiDistrictSourceFile.csv')  # D:\UNC\KPI
+dfDistrict = pd.read_csv(r'{}\AcademicsKpiDistrictSourceFile.csv'.format(Bases.BaseKPI.source_files_path))  # D:\UNC\KPI
 dfDistrict = dfDistrict[['DistrictKey', 'DDALLS']]
 dfDistrict.rename(columns={'DDALLS': 'Raw_Score'}, inplace=True)
 dfDistrict['Raw_Score_Details'] = ''

@@ -1,3 +1,7 @@
+'''
+% of Withdrawn student rate
+'''
+
 import pandas as pd
 from BaseServices import Bases
 

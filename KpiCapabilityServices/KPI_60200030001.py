@@ -5,8 +5,8 @@ KPI: % of withdrawn students located
 import pandas as pd
 from BaseServices import Bases
 
-df = pd.read_csv(r'{}\KPI_CurrentEnrollment.csv'.format(Bases.BaseKPI.source_files_path))
-df2 = pd.read_csv(r"D:\UNC\KPI\KPI_60200030001.csv")
+df = pd.read_csv(r'{}\KPI_60100010001.csv'.format(Bases.BaseKPI.source_files_path))
+df2 = pd.read_csv(r'{}\KPI_60200030001.csv'.format(Bases.BaseKPI.source_files_path))
 df = df.merge(df2, on='EntityID', how='left')
 df.rename(columns={'EntityID': 'Campus_RowID'}, inplace=True)
 df['FatalErrorCount'].fillna(0, inplace=True)

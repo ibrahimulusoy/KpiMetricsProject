@@ -9,8 +9,8 @@ https://medium.com/@vince.shields913/reading-google-sheets-into-a-pandas-datafra
 
 
 class BaseKPI:
-    source_files_path = r'D:\UNC\KPI'
-    # source_files_path = r'C:\Users\eatakahraman\Desktop'
+    # source_files_path = r'D:\UNC\KPI'
+    source_files_path = r'C:\Users\eatakahraman\Desktop\KPI_UAT_Tests'
 
     def setKPIDetails(df, isGreaterThan, kpi_rowid, isDistrictScoresAsked):
         # Get KPI details for that specific KPI and arrange required columns for target tables
