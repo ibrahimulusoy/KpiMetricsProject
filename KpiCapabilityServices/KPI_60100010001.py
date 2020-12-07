@@ -3,7 +3,6 @@ KPI: Number of Enrollment
 '''
 
 import pandas as pd
-
 from BaseServices import Bases
 
 # Get current and budgeted enrolment counts and calculate scores for all campuses

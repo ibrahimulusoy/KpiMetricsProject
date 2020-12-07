@@ -1,14 +1,15 @@
 import datetime
 import os
 import time
-from selenium import webdriver
+# from selenium import webdriver
 from BaseServices import Bases
 
-chrome_options = webdriver.ChromeOptions()
-prefs = {'download.default_directory': r'{}'.format(Bases.BaseKPI.source_files_path)}
-chrome_options.add_experimental_option('prefs', prefs)
-browser = webdriver.Chrome(r'C:\chromedriver', options=chrome_options)
+# chrome_options = webdriver.ChromeOptions()
+# prefs = {'download.default_directory': r'{}'.format(Bases.BaseKPI.source_files_path)}
+# chrome_options.add_experimental_option('prefs', prefs)
+# browser = webdriver.Chrome(r'C:\chromedriver', options=chrome_options)
 
+browser = Bases.startSelenium()
 browser.get('https://skyward.harmonytx.org/ws/reports/')
 time.sleep(5)
 txtUserName = browser.find_element_by_id('UserName')

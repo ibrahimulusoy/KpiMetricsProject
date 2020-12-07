@@ -2,10 +2,19 @@ from EntityServices import Entities
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from selenium import webdriver
 
 '''Useful link for gspread and oauth2client libraries :
 https://medium.com/@vince.shields913/reading-google-sheets-into-a-pandas-dataframe-with-gspread-and-oauth2-375b932be7bf
 '''
+
+
+def startSelenium():
+    chrome_options = webdriver.ChromeOptions()
+    pref = {'download.default_directory': r'{}'.format(BaseKPI.source_files_path)}
+    chrome_options.add_experimental_option('prefs', pref)
+    browser = webdriver.Chrome(r'C:\chromedriver', options=chrome_options)
+    return browser
 
 
 class BaseKPI:

@@ -1,11 +1,9 @@
-'''
-KPI: Number of Enrollment
-'''
+
 
 import pandas as pd
 from BaseServices import Bases
 # Get current and budgeted enrolment counts and calculate scores for all campuses
-df1 = pd.read_excel(r"C:\Users\iulusoy\Desktop\KPI\HPSFS.xlsx",'FIRST Rating ')
+df1 = pd.read_excel(r"{}\HPSFS.xlsx".format(Bases.BaseKPI.source_files_path), 'FIRST Rating ')
 #create dataframe
 data = {'DistrictKey': ['10', '20', '30', '40','80', '70', '60'],
 	'Raw_Score': [df1.iat[128,2], df1.iat[128,3], df1.iat[128,4], df1.iat[128,5],df1.iat[128,6],df1.iat[128,7],df1.iat[128,8]]}

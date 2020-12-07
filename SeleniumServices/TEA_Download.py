@@ -3,9 +3,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 options = webdriver.ChromeOptions()
-prefs = {'download.default_directory':'C:\Downloads'}
+prefs = {'download.default_directory': 'C:\Downloads'}
 options.add_experimental_option('prefs', prefs)
-driver=webdriver.Chrome(ChromeDriverManager().install(),chrome_options=options)
+driver=webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
 
 #Donload district rates
 driver.get("https://rptsvr1.tea.texas.gov/perfreport/account/2019/download.html")
@@ -18,7 +18,7 @@ time.sleep(2)
 driver.find_element_by_name("selall").click()
 time.sleep(2)
 driver.find_element_by_css_selector("input[type='submit'][value='Download']").click()
-time.sleep(5)
+time.sleep(50)
 #Donload district rates
 
 #Donload district rates
@@ -31,7 +31,7 @@ time.sleep(2)
 driver.find_element_by_name("selall").click()
 time.sleep(2)
 driver.find_element_by_css_selector("input[type='submit'][value='Download']").click()
-time.sleep(2)
+time.sleep(100)
 driver.quit()
 
 
