@@ -29,7 +29,8 @@ class BaseKPI:
         # Get district codes for all campuses from HPS_METRICS db.
         districts = Entities.KpiOperations.getDistrictsForAllCampuses()
         df = pd.merge(df, districts, left_on='Campus_RowID', right_on='CampusKey')
-        dfCampus = df[['District_RowID', 'Campus_RowID', 'Term_RowID', 'KPI_RowID', 'Category_RowID',
+        df['CorpID'] = 1
+        dfCampus = df[['CorpID', 'District_RowID', 'Campus_RowID', 'Term_RowID', 'KPI_RowID', 'Category_RowID',
                        'Department_RowID', 'Is_KPI_Applicable', 'Adjusted_Weight', 'Adjusted_Score', 'Score',
                        'Raw_Score', 'Raw_Score_Details', 'Artifact_URL']]
 
@@ -45,11 +46,13 @@ class BaseKPI:
         # Get KPI details for that specific KPI and arrange required columns for target table
         # Target table is Fact_KPI on the HPS_METRICS db.
         BaseKPI.setKPICommonColumns(df, isGreaterThan, kpi_rowid)
-        max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
-        max_row_id = max_row_id[''][0] + 1
-        df['RowID'] = range(max_row_id, max_row_id + len(df))
+        # max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
+        # max_row_id = max_row_id[''][0] + 1
+        # df['RowID'] = range(max_row_id, max_row_id + len(df))
         df.rename(columns={'DistrictKey': 'District_RowID'}, inplace=True)
-        df = df[['RowID', 'Term_RowID', 'KPI_RowID', 'Category_RowID', 'Department_RowID', 'Is_KPI_Applicable',
+        df['CorpID'] = 1
+        # Removed "'RowID'" column from the following line.
+        df = df[['CorpID', 'Term_RowID', 'KPI_RowID', 'Category_RowID', 'Department_RowID', 'Is_KPI_Applicable',
                  'Adjusted_Weight',
                  'District_RowID', 'Adjusted_Score', 'Score', 'Raw_Score', 'Raw_Score_Details', 'Artifact_URL']]
 
@@ -77,10 +80,12 @@ class BaseKPI:
         # df.drop_duplicates(keep='first', inplace=True)
         df = df.drop_duplicates()
         df = df.merge(df2, how='inner', on='District_RowID')
-        max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
-        max_row_id = max_row_id[''][0] + 1
-        df['RowID'] = range(max_row_id, max_row_id + len(df))
-        df = df[['RowID', 'Term_RowID', 'KPI_RowID', 'Category_RowID', 'Department_RowID', 'Is_KPI_Applicable',
+        df['CorpID'] = 1
+        # max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
+        # max_row_id = max_row_id[''][0] + 1
+        # df['RowID'] = range(max_row_id, max_row_id + len(df))
+        # Removed "'RowID'" column from the following line.
+        df = df[['CorpID', 'Term_RowID', 'KPI_RowID', 'Category_RowID', 'Department_RowID', 'Is_KPI_Applicable',
                  'Adjusted_Weight', 'District_RowID', 'Adjusted_Score', 'Score', 'Raw_Score', 'Raw_Score_Details',
                  'Artifact_URL']]
         Entities.KpiOperations.delDistrictKPIOldRecords(kpi_rowid, df['Term_RowID'][0])

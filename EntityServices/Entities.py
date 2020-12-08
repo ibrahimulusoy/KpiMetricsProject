@@ -15,7 +15,7 @@ class KpiOperations:
                                             cfg.mssql['Database'], cfg.mssql['Driver']))
 
     def getKPIDetails(KPI_RowID):
-        sql = 'select k.RowID KPI_Row_Id,c.CategoryKey,w.Term_RowID,d.DepartmentKey, ' \
+        sql = 'select k.RowID KPI_Row_Id,c.RowID CategoryKey,w.Term_RowID,d.RowID DepartmentKey, ' \
               'w.Is_KPI_Applicable,w.Weight,w.Score4,w.Score3,w.Score2,w.Score1 ' \
               'from Dim_kpi k ' \
               'join Dim_Category C on  c.CategoryKey=k.CategoryKey ' \
@@ -25,6 +25,18 @@ class KpiOperations:
               'and w.Term_RowID=(select max(RowID) Term_Row_ID from Dim_Term t)'.format(KPI_RowID)
         kpiDetails = pd.read_sql(sql, conn)
         return kpiDetails
+
+    # def getKPIDetails(KPI_RowID):
+    #     sql = 'select k.RowID KPI_Row_Id,c.CategoryKey,w.Term_RowID,d.DepartmentKey, ' \
+    #           'w.Is_KPI_Applicable,w.Weight,w.Score4,w.Score3,w.Score2,w.Score1 ' \
+    #           'from Dim_kpi k ' \
+    #           'join Dim_Category C on  c.CategoryKey=k.CategoryKey ' \
+    #           'join dim_department d on d.DepartmentKey=c.DepartmentKey ' \
+    #           'join.dim_kpi_weight w on w.KPI_RowID=k.RowID ' \
+    #           'where k.RowID={}' \
+    #           'and w.Term_RowID=(select max(RowID) Term_Row_ID from Dim_Term t)'.format(KPI_RowID)
+    #     kpiDetails = pd.read_sql(sql, conn)
+    #     return kpiDetails
 
     def getDistrictsForAllCampuses():
         sql = 'SELECT District_RowID, CampusKey, campus_weight FROM Dim_Campus'
