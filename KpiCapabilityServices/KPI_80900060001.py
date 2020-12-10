@@ -1,5 +1,5 @@
 """
-KPI: Average # of teachers with PBL submissions per secondary campus
+KPI: Average # of teachers with approved PBL submissions per secondary campus
 Level: Campus-level KPI
 Department: Programs - Advanced Programs - STEM, GT, and PBL
 KPI ID: 80900060001

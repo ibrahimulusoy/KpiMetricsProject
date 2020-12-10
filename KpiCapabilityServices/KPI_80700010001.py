@@ -22,25 +22,26 @@ https://rptsvr1.tea.texas.gov/perfreport/tapr/2019/datadict.pdf
 
 import pandas as pd
 from BaseServices import Bases
-
+# CDS00AM01219R : % at Meets GL Standard or Above
 df = pd.read_csv(r'{}\CAMPSTAAR2.csv'.format(Bases.BaseKPI.source_files_path))
-df = df[['CAMPUS', 'CDS00AM01219R']]
+df = df[['CAMPUS', 'CDS00AM01S19R']]
 dfCampuses = pd.read_csv(r'{}\Campuses.csv'.format(Bases.BaseKPI.source_files_path))
 df = df.merge(dfCampuses, how='inner', left_on='CAMPUS', right_on='StateCampusCode')
-df = df[['EntityID', 'CDS00AM01219R']]
-df.rename(columns={'EntityID': 'Campus_RowID', 'CDS00AM01219R': 'Raw_Score'}, inplace=True)
+df = df[['EntityID', 'CDS00AM01S19R']]
+df.rename(columns={'EntityID': 'Campus_RowID', 'CDS00AM01S19R': 'Raw_Score'}, inplace=True)
 df['Raw_Score'] = pd.to_numeric(df['Raw_Score'])
 df['Raw_Score_Details'] = "TEA TAPR Advanced Data"
 df['Artifact_URL'] = 'https://rptsvr1.tea.texas.gov/perfreport/tapr/2019/download/DownloadData.html'
 Bases.BaseKPI.setKPIDetails(df, True, 80700010001, False)
 
+# DDS00AM01219R : : % at Meets GL Standard or Above
 # Select District option on the page "TEA TAPR Advanced Data" and download required data.
 dfDistrict = pd.read_csv(r'{}\DISTSTAAR2.csv'.format(Bases.BaseKPI.source_files_path), low_memory=False)
-dfDistrict = dfDistrict[['DISTRICT', 'DDS00AM01219R']]
+dfDistrict = dfDistrict[['DISTRICT', 'DDS00AM01S19R']]
 dfCampuses = dfCampuses[dfCampuses['EntityCode'] == 0]
 dfDistrict = dfDistrict.merge(dfCampuses, how='inner', left_on='DISTRICT', right_on='StateDistrictCode')
-dfDistrict = dfDistrict[['DistrictID', 'DDS00AM01219R']]
-dfDistrict.rename(columns={'DistrictID': 'DistrictKey', 'DDS00AM01219R': 'Raw_Score'}, inplace=True)
+dfDistrict = dfDistrict[['DistrictID', 'DDS00AM01S19R']]
+dfDistrict.rename(columns={'DistrictID': 'DistrictKey', 'DDS00AM01S19R': 'Raw_Score'}, inplace=True)
 dfDistrict['Raw_Score'] = pd.to_numeric(dfDistrict['Raw_Score'])
 dfDistrict['Raw_Score_Details'] = 'TEA TAPR Advanced Data'
 dfDistrict['Artifact_URL'] = 'https://rptsvr1.tea.texas.gov/perfreport/tapr/2019/download/DownloadData.html'
