@@ -54,6 +54,7 @@ class BaseKPI:
         if df['isKPIApplicable'][0] == 0:
             print('The Kpi is not going to be calculated in this term.')
             return
+        # This is for Github push..
         # max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
         # max_row_id = max_row_id[''][0] + 1
         # df['RowID'] = range(max_row_id, max_row_id + len(df))
