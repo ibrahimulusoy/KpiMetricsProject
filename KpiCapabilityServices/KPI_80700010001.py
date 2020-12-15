@@ -23,7 +23,7 @@ https://rptsvr1.tea.texas.gov/perfreport/tapr/2019/datadict.pdf
 import pandas as pd
 from BaseServices import Bases
 # CDS00AM01219R : % at Meets GL Standard or Above
-df = pd.read_csv(r'{}\CAMPSTAAR2.csv'.format(Bases.BaseKPI.source_files_path))
+df = pd.read_csv(r'{}\CSTAAR_ALL.csv'.format(Bases.BaseKPI.source_files_path))
 df = df[['CAMPUS', 'CDS00AM01S19R']]
 dfCampuses = pd.read_csv(r'{}\Campuses.csv'.format(Bases.BaseKPI.source_files_path))
 df = df.merge(dfCampuses, how='inner', left_on='CAMPUS', right_on='StateCampusCode')

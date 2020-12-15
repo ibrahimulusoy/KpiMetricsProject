@@ -24,7 +24,12 @@ class BaseKPI:
     def setKPIDetails(df, isGreaterThan, kpi_rowid, isDistrictScoresAsked):
         # Get KPI details for that specific KPI and arrange required columns for target tables
         # Insert campus-level and their district-level scores via this method.
+
         BaseKPI.setKPICommonColumns(df, isGreaterThan, kpi_rowid)
+
+        if ('IsKPIApplicable' in df.columns) and (df['IsKPIApplicable'][0] == 0):
+            print('The Kpi is not going to be calculated in this term.')
+            return
 
         # Get district codes for all campuses from HPS_METRICS db.
         districts = Entities.KpiOperations.getDistrictsForAllCampuses()
@@ -46,6 +51,9 @@ class BaseKPI:
         # Get KPI details for that specific KPI and arrange required columns for target table
         # Target table is Fact_KPI on the HPS_METRICS db.
         BaseKPI.setKPICommonColumns(df, isGreaterThan, kpi_rowid)
+        if df['isKPIApplicable'][0] == 0:
+            print('The Kpi is not going to be calculated in this term.')
+            return
         # max_row_id = Entities.KpiOperations.getMaxRowIdFromFactKPI()
         # max_row_id = max_row_id[''][0] + 1
         # df['RowID'] = range(max_row_id, max_row_id + len(df))
@@ -95,6 +103,10 @@ class BaseKPI:
     def setKPICommonColumns(df, isGreaterThan, kpi_rowid):
         # Get KPI details for that specific KPI and arrange required columns for target table
         kpiDetails = Entities.KpiOperations.getKPIDetails(kpi_rowid)
+
+        if kpiDetails['Is_KPI_Applicable'][0] == 0:
+            df['isKPIApplicable'] = 0
+            return
 
         # Calculate score based on score levels on DIM_KPI_WEIGHT
         if isGreaterThan:

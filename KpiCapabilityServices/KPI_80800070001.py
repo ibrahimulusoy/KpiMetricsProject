@@ -11,7 +11,7 @@ it needs to be flagged.
 import pandas as pd
 from BaseServices import Bases
 
-df = pd.read_excel(r'{}\EllevationKPI.xlsx'.format(Bases.BaseKPI.source_files_path))
+df = pd.read_csv(r'{}\KPI_80800070001.csv'.format(Bases.BaseKPI.source_files_path))
 print(df.columns)
 dfAll = df.groupby("DistrictID").count().reset_index()
 dfAll = dfAll[['DistrictID', 'StudentID']]
@@ -22,8 +22,7 @@ dfLessThenFiveYears = dfLessThenFiveYears[['DistrictID', 'StudentID']]
 dfLessThenFiveYears.rename(columns={'StudentID': 'LessThenFiveYearsESL'}, inplace=True)
 dfAll = dfAll.merge(dfLessThenFiveYears, how='inner', on='DistrictID')
 dfAll["Raw_Score"] = dfAll["LessThenFiveYearsESL"] / dfAll["AllESLStudents"] * 100
-dfAll['Raw_Score_Details'] = ''
+dfAll['Raw_Score_Details'] = 'CustomDev.KPI_80800070001'
 dfAll['Artifact_URL'] = 'SKYWARD'
-
-dfProcessed.to_csv(r'{}\Earned_1026.csv'.format(Bases.BaseKPI.source_files_path))
-# Bases.BaseKPI.setKPIDetails(dfProcessed, True, 80800070001, True)
+dfAll.rename(columns={'DistrictID': 'District_RowID'}, inplace=True)
+Bases.BaseKPI.setDistrictKPIDetails(dfAll, True, 80800070001)
