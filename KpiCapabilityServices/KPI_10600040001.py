@@ -12,6 +12,7 @@ data = {'DistrictKey': ['10', '20', '30', '40','80', '70', '60'],
 df_last = pd.DataFrame(data)
 
 df_last['Raw_Score']=df_last['Raw_Score'].str.replace(r' Days', '')
+df_last['Raw_Score']=pd.to_numeric(df_last['Raw_Score'])
 df_last['Raw_Score_Details'] = "Finance_Excel_Sheet"
 df_last['Artifact_URL']='Finance Excel'
 Bases.BaseKPI.setDistrictKPIDetails(df_last, True, 10600040001)
