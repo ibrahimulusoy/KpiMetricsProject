@@ -25,6 +25,16 @@ class KpiOperations:
               'and w.Term_RowID=(select max(RowID) Term_Row_ID from Dim_Term t)'.format(KPI_RowID)
         kpiDetails = pd.read_sql(sql, conn)
         return kpiDetails
+    def getManualKPIsCampusData(Term_RowId):
+        sql = 'SELECT c.corpid,c.term_rowid,c.kpi_rowid,c.category_rowid, c.Department_RowID,c.Is_KPI_Applicable,c.Adjusted_Weight,c.District_RowID, ISNULL(ROUND(sum(adjusted_score) / sum(adjusted_weight), 1), 0)* c.Adjusted_Weight adjusted_score,  ISNULL(ROUND(sum(adjusted_score) / sum(adjusted_weight), 1), 0) Score ' \
+              'FROM dbo.Fact_KPI_Campus c ' \
+              'WHERE Term_RowID = {} AND KPI_RowID IN (SELECT KPI_RowID FROM dbo.Dim_KPI_Weight w WHERE w.Term_RowID = {} AND Calculation_Type = {} ) ' \
+              'GROUP BY c.corpid, c.term_rowid,c.kpi_rowid,c.category_rowid, c.Department_RowID,c.Is_KPI_Applicable,c.Adjusted_Weight,c.District_RowID '.format(Term_RowId, Term_RowId, "'M'")
+
+        # ROUND(sum(adjusted_score) / sum(adjusted_weight), 1), 0)* c.Adjusted_Weight adjusted_score,  ISNULL(ROUND(sum(adjusted_score) / sum(adjusted_weight), 1), 0) Score '
+        resultSet = pd.read_sql(sql, conn)
+        return resultSet
+
 
     # def getKPIDetails(KPI_RowID):
     #     sql = 'select k.RowID KPI_Row_Id,c.CategoryKey,w.Term_RowID,d.DepartmentKey, ' \
