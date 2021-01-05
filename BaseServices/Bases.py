@@ -51,7 +51,7 @@ class BaseKPI:
         # Get KPI details for that specific KPI and arrange required columns for target table
         # Target table is Fact_KPI on the HPS_METRICS db.
         BaseKPI.setKPICommonColumns(df, isGreaterThan, kpi_rowid)
-        if df['isKPIApplicable'][0] == 0:
+        if ('IsKPIApplicable' in df.columns) and (df['isKPIApplicable'][0] == 0):
             print('The Kpi is not going to be calculated in this term.')
             return
         # This is for Github push..

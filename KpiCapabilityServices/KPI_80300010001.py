@@ -8,6 +8,9 @@ import pandas as pd
 from BaseServices import Bases
 
 df = pd.read_csv(r'{}\AssessmentResults.csv'.format(Bases.BaseKPI.source_files_path), low_memory=False)
+# df2 = pd.read_csv(r'{}\AssessmentResults.csv'.format(Bases.BaseKPI.source_files_path), low_memory=False)
+# print(df.columns)
+# print(df2.columns)
 df = df[['SchoolName', 'Discipline', 'GrowthMeasureYN',
          'FallToFallMetProjectedGrowth',
          'FallToWinterMetProjectedGrowth',  # has data
