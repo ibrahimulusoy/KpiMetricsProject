@@ -58,5 +58,5 @@ dfProcessed["Raw_Score"] = dfProcessed["Raw_Score"].fillna(0)
 dfProcessed['Raw_Score_Details'] = 'Bloomboard'
 dfProcessed['Artifact_URL'] = 'https://bloomboard.com/'
 
-dfProcessed.to_csv(r'{}\Earned_1026.csv'.format(Bases.BaseKPI.source_files_path))
-# Bases.BaseKPI.setKPIDetails(dfProcessed, True, 80500070001, True)
+# dfProcessed.to_csv(r'{}\Earned_1026.csv'.format(Bases.BaseKPI.source_files_path))
+Bases.BaseKPI.setKPIDetails(dfProcessed, True, 80500070001, True)

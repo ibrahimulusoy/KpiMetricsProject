@@ -15,7 +15,7 @@ from BaseServices import Bases
 dfCampus = pd.read_csv(r'{}\AcademicsKpiCampusSourceFile.csv'.format(Bases.BaseKPI.source_files_path))
 dfCampus = dfCampus[['Campus_RowID', 'CD2BS']]
 dfCampus.rename(columns={'CD2BS': 'Raw_Score'}, inplace=True)
-dfCampus['Raw_Score_Details'] = ''
+dfCampus['Raw_Score_Details'] = 'TEA - Accountability Summary'
 dfCampus['Artifact_URL'] = 'https://txschools.gov/schools'
 Bases.BaseKPI.setKPIDetails(dfCampus, True, 80100070001, False)
 
@@ -24,6 +24,6 @@ Bases.BaseKPI.setKPIDetails(dfCampus, True, 80100070001, False)
 dfDistrict = pd.read_csv(r'{}\AcademicsKpiDistrictSourceFile.csv'.format(Bases.BaseKPI.source_files_path))
 dfDistrict = dfDistrict[['DistrictKey', 'DD2BS']]
 dfDistrict.rename(columns={'DD2BS': 'Raw_Score'}, inplace=True)
-dfDistrict['Raw_Score_Details'] = ''
+dfDistrict['Raw_Score_Details'] = 'TEA - Accountability Summary'
 dfDistrict['Artifact_URL'] = 'https://txschools.gov/schools'
 Bases.BaseKPI.setDistrictKPIDetails(dfDistrict, True, 80100070001)

@@ -22,7 +22,7 @@ dfCampus['Denominator'] = np.where((dfCampus['CAD_SOCI'] != 1.0) & (dfCampus['CA
 dfCampus['Raw_Score'] = dfCampus['Distinct_Sum'] * 100 / dfCampus['Denominator']
 dfDistrictAvg = dfCampus[['DISTRICT', 'Distinct_Sum', 'Denominator']]
 dfCampus = dfCampus[['Campus_RowID', 'Raw_Score']]
-dfCampus['Raw_Score_Details'] = ''
+dfCampus['Raw_Score_Details'] = 'TEA - Accountability Summary'
 dfCampus['Artifact_URL'] = 'https://txschools.gov/schools'
 Bases.BaseKPI.setKPIDetails(dfCampus, True, 80100090001, False)
 
@@ -34,6 +34,6 @@ dfDistrict = pd.merge(dfDistrict, dfDistrictAvg, left_on='StateDistrictCode', ri
 dfDistrict['Distinct_Sum'] = dfDistrict['Distinct_Sum'] + dfDistrict['DAD_POST']
 dfDistrict['Raw_Score'] = dfDistrict['Distinct_Sum'] * 100 / dfDistrict['Denominator']
 dfDistrict = dfDistrict[['DistrictKey', 'Raw_Score']]
-dfDistrict['Raw_Score_Details'] = ''
+dfDistrict['Raw_Score_Details'] = 'TEA - Accountability Summary'
 dfDistrict['Artifact_URL'] = 'https://txschools.gov/schools'
 Bases.BaseKPI.setDistrictKPIDetails(dfDistrict, True, 80100090001)

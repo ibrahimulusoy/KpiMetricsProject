@@ -7,7 +7,7 @@ Department: Academics - College Bound
 import pandas as pd
 from BaseServices import Bases
 
-dfAPPassing = pd.read_csv(r'{}\AP Student Datafile 2019.csv'.format(Bases.BaseKPI.source_files_path))
+dfAPPassing = pd.read_csv(r'{}\AP Student Datafile 2020.csv'.format(Bases.BaseKPI.source_files_path))
 
 ExamCodeColumns = []
 dfAPPassing.columns.map(lambda x: ExamCodeColumns.append(x) if 'Exam Code' in x else None)
@@ -33,5 +33,5 @@ df.rename(columns={'EntityID': 'Campus_RowID'}, inplace=True)
 df["Raw_Score"] = df["PassedExams"] / df["ExamCount"] * 100
 df['Raw_Score_Details'] = ''
 df['Artifact_URL'] = 'College Bound'
-Bases.BaseKPI.setKPIDetails(df, True, 80200090001, True)
+Bases.BaseKPI.setKPIDetails(df, True, 30600050001, True)
 
