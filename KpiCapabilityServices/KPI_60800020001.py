@@ -5,6 +5,7 @@ KPI 7: % of Screenings complete (vision, hearing, spinal, and diabetes)
 import pandas as pd
 from BaseServices import Bases
 from EntityServices import Entities
+from datetime import datetime
 pd.options.mode.chained_assignment = None  # default='warn'
 
 df = pd.read_csv(r'{}\KPI_60800020001.csv'.format(Bases.BaseKPI.source_files_path))
@@ -48,11 +49,21 @@ result['Raw_Score_Details'] = 'CustomDev.KPI_60800020001'
 result['Artifact_URL'] = 'SKYWARD'
 
 # DATABASE INSERTION
-if Entities.KpiOperations.getSemesterNo().semesterNo.item() == 1:
-    Bases.BaseKPI.setKPIDetails(dfVision, False, 60800020001, True)
+
+Term = 1 if datetime.today().month in [11, 12, 1, 2] else (2 if datetime.today().month in [5, 6, 7] else 0)
+
+# dfCampuses = dfCampuses.merge(dfVision, how='left', left_on='EntityID', right_on='Campus_RowID')
+# dfVision = dfCampuses[['EntityID', 'Raw_Score', 'Raw_Score_Details', 'Artifact_URL']]
+# dfVision.rename(columns={'EntityID': 'Campus_RowID'}, inplace=True)
+# dfCampuses = pd.read_csv(r'{}/Campuses.csv'.format(Bases.BaseKPI.source_files_path))
+# dfCampuses = dfCampuses[dfCampuses['EntityCode']!=0]
+
+# if Entities.KpiOperations.getSemesterNo().semesterNo.item() == 1:
+if  Term == 1:
+    Bases.BaseKPI.setKPIDetails(dfVision, True, 60800020001, True)
     print('Fall KPI record has been inserted to Fact_KPI_Campus table.')
 else:
-    Bases.BaseKPI.setKPIDetails(result, False, 60800020001, True)
+    Bases.BaseKPI.setKPIDetails(result, True, 60800020001, True)
     print('Spring KPI record has been inserted to Fact_KPI_Campus table.')
 
 
